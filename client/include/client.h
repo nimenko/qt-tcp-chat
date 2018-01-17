@@ -3,10 +3,9 @@
 
 #include <QObject>
 #include <QString>
+#include <QStringList>
 #include <QTcpSocket>
 #include <QHostAddress>
-#include <QTextStream>
-#include <QDebug>
 
 class Client : public QObject
 {
@@ -15,7 +14,7 @@ public:
     explicit Client(QObject* parent = nullptr);
 
     void connect_to_server(const QHostAddress& hostname, const quint16& port, const QString& name);
-    void send_message(QString message);
+    void send_message(const QString& message);
 
 private:
     QTcpSocket* socket_;

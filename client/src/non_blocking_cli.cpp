@@ -1,10 +1,13 @@
+#include <QTextStream>
+#include <QDebug>
+
 #include "include/non_blocking_cli.h"
 
 NonBlockingCLI::NonBlockingCLI(QObject* parent) : QObject(parent)
 {
     this->moveToThread(&thread_);
 
-    connect(&thread_, SIGNAL(started()), this, SLOT(read_stdin()));
+    connect(&thread_, &QThread::started, this, &NonBlockingCLI::read_stdin);
 
     thread_.start();
 }

@@ -1,3 +1,7 @@
+#include <QTextStream>
+#include <QRegExp>
+#include <QDebug>
+
 #include "include/server.h"
 
 Server::Server(QObject* parent) : QTcpServer(parent)
@@ -39,13 +43,13 @@ void Server::incomingConnection(qintptr socket_d)
 
     QTextStream(stdout) << "New client from: " << client->peerAddress().toString() << "\n";
 
-    connect(client, SIGNAL(readyRead()), this, SLOT(on_ready_read()));
-    connect(client, SIGNAL(disconnected()), this, SLOT(on_disconnected()));
+    connect(client, &QTcpSocket::readyRead, this, &Server::on_ready_read);
+    connect(client, &QTcpSocket::disconnected, this, &Server::on_disconnected);
 }
 
 void Server::on_ready_read()
 {
-    QTcpSocket* client = (QTcpSocket*)sender();
+    QTcpSocket* client = dynamic_cast<QTcpSocket*> (sender());
 
     while(client->canReadLine())
     {
@@ -90,7 +94,7 @@ void Server::on_ready_read()
 
 void Server::on_disconnected()
 {
-    QTcpSocket* client = (QTcpSocket*)sender();
+    QTcpSocket* client = dynamic_cast<QTcpSocket*> (sender());
 
     QTextStream(stdout) << "Client disconnected: " << client->peerAddress().toString() << "\n";
 

@@ -4,8 +4,6 @@
 #include <QObject>
 #include <QThread>
 #include <QString>
-#include <QTextStream>
-#include <QDebug>
 
 class NonBlockingCLI : public QObject
 {

@@ -2,8 +2,8 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QObject>
-#include <QDebug>
 #include <QTextStream>
+#include <QDebug>
 
 #include "include/client.h"
 #include "include/non_blocking_cli.h"

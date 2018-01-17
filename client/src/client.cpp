@@ -1,12 +1,14 @@
+#include <QDebug>
+
 #include "include/client.h"
 
 Client::Client(QObject* parent) :
     QObject(parent),
     socket_(new QTcpSocket(this))
 {
-    connect(socket_, SIGNAL(connected()), this, SLOT(on_socket_connected()));
-    connect(socket_, SIGNAL(readyRead()), this, SLOT(on_socket_ready_read()));
-    connect(socket_, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(on_socket_error(QAbstractSocket::SocketError)));
+    connect(socket_, &QTcpSocket::connected, this, &Client::on_socket_connected);
+    connect(socket_, &QTcpSocket::readyRead, this, &Client::on_socket_ready_read);
+    connect(socket_, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), this, &Client::on_socket_error);
 }
 
 void Client::connect_to_server(const QHostAddress& hostname, const quint16& port, const QString& name)
@@ -17,7 +19,7 @@ void Client::connect_to_server(const QHostAddress& hostname, const quint16& port
     socket_->connectToHost(hostname_, port_);
 }
 
-void Client::send_message(QString message)
+void Client::send_message(const QString& message)
 {
     if (!message.isEmpty())
     {

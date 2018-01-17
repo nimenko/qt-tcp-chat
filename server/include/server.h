@@ -6,10 +6,7 @@
 #include <QTcpServer>
 #include <QMap>
 #include <QSet>
-#include <QRegExp>
 #include <QString>
-#include <QTextStream>
-#include <QDebug>
 
 class Server : public QTcpServer
 {
