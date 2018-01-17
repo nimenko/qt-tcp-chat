@@ -35,9 +35,9 @@ target_wrapper.*
 # Qt Creator
 *.autosave
 
-# Qt Ctreator QML
+# Qt Creator QML
 *.qmlproject.user
 *.qmlproject.user.*
 
-# Qt Ctreator CMake
+# Qt Creator CMake
 CMakeLists.txt.user*
